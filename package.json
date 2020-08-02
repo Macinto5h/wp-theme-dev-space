@@ -1,0 +1,32 @@
+{
+  "name": "wp-theme-dev-space",
+  "version": "1.0.0",
+  "description": "Node development space for WP themes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Macinto5h/wp-theme-dev-space.git"
+  },
+  "author": "MJ Camara",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Macinto5h/wp-theme-dev-space/issues"
+  },
+  "homepage": "https://github.com/Macinto5h/wp-theme-dev-space#readme",
+  "dependencies": {
+    "bootstrap": "^4.5.0",
+    "express": "^4.17.1",
+    "gulp": "^4.0.2",
+    "gulp-cli": "^2.3.0",
+    "gulp-pug": "^4.0.1",
+    "gulp-sass": "^4.1.0",
+    "node-sass": "^4.14.1",
+    "pug": "^3.0.0"
+  },
+  "devDependencies": {
+    "gulp-autoprefixer": "^7.0.1"
+  }
+}
