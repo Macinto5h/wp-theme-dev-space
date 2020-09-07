@@ -4,5 +4,50 @@ block vars
     - var title = 'Index'
 
 block body
-    a(href="/bootstrap.html") Bootstrap Page
-    a(href="/wordpress.html") Wordpress Mockup
+    .container
+        //- Headings
+        h1 H1 Header
+        h2 H2 Header
+        h3 H3 Header
+        h4 H4 Header
+        h5 H5 Header
+        h6 H6 Header
+        //- Buttons
+        button.btn(type='button') Default
+        button.btn.btn-primary(type='button') Primary
+        button.btn.btn-secondary(type='button') Secondary
+        button.btn.btn-success(type='button') Success
+        button.btn.btn-danger(type='button') Danger
+        button.btn.btn-link(type='button') Link
+        //- Code
+        code 10 + 5 = 15
+        //- Keyboard Input
+        kbd shift
+        | +
+        kbd S
+        //- Table
+        table.table
+            thead
+                tr
+                    th #
+                    th First
+                    th last
+                    th.text-right Age
+            tbody
+                tr
+                    th 1
+                    td John
+                    td Doe
+                    td.text-right 25
+                tr
+                    th 2
+                    td Jane
+                    td Violet
+                    td.text-right 27
+                tr 
+                    th 3
+                    td Jack
+                    td Gates
+                    td.text-right 33
+        
+
