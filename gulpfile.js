@@ -31,46 +31,67 @@ function compileSass() {
 
 	sass.compiler = require("node-sass");
 
-	return gulp.src("./src/scss/custom/*.scss").pipe(
+	return gulp.src("./src/assets/scss/custom/style.scss").pipe(
 		sass().on("error", sass.logError),
-	)
-	.pipe(gulp.dest("./static/css"));
+	).pipe(gulp.dest("./static/assets/css")).pipe(gulp.dest("./theme"));
 }
 
 function runAutoprefixer() {
 	let gulp = require("gulp");
 	const autoprefixer = require("gulp-autoprefixer");
 
-	return gulp.src("./static/css/*.css").pipe(
+	return gulp.src("./static/assets/css/*.css").pipe(
 		autoprefixer({
 			cascade: false,
 		}),
-	).pipe(gulp.dest("./static/css"));
+	).pipe(gulp.dest("./static/assets/css"));
+}
+
+function concatJS() {
+	let gulp = require("gulp");
+	let concat = require("gulp-concat");
+
+	return gulp.src("./src/assets/js/**/*.js").pipe(concat("scripts.js")).pipe(
+		gulp.dest("./static/assets/js"),
+	);
+}
+
+function babelJS() {
+	let gulp = require("gulp");
+	let babel = require("gulp-babel");
+
+	return gulp.src("./static/assets/js/scripts.js").pipe(
+		babel({
+			presets: ["@babel/env"],
+		}),
+	).pipe(gulp.dest("./static/assets/js")).pipe(gulp.dest("./theme/assets/js"));
 }
 
 function buildHTML() {
 	let gulp = require("gulp");
 	let pug = require("gulp-pug");
 
-	return gulp.src("src/pug/*.pug").pipe(pug()).pipe(gulp.dest("static"));
+	return gulp.src("src/views/*.pug").pipe(pug()).pipe(gulp.dest("static"));
 }
 
 function watchAll() {
 	let browserSync = require("browser-sync").create();
-	
+
 	browserSync.init({
-		server: "./static"
+		server: "./static",
 	});
 
-	watch("src/pug/*.pug", buildHTML);
-	watch("src/scss/custom/*.scss", series(compileSass, runAutoprefixer));
-	watch("static/*.html").on('change', browserSync.reload);
-	watch("static/css/style.css").on('change', browserSync.reload);
+	watch("src/views/**/*.pug", buildHTML);
+	watch("src/assets/scss/**/*.scss", series(compileSass, runAutoprefixer));
+	watch("static/*.html").on("change", browserSync.reload);
+	watch("static/assets/css/style.css").on("change", browserSync.reload);
 }
 
 exports.default = series(
 	compileSass,
 	runAutoprefixer,
+	concatJS,
+	babelJS,
 	buildHTML,
 	runExpress,
 	watchAll,
